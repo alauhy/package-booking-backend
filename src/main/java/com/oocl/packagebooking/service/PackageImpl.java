@@ -10,8 +10,8 @@ public interface PackageImpl {
 
     Package save(Package pkg);
 
-    Package setPackageStatus(int id,Package pkg);
+    Package setPackageStatus(int id,Package pkg)throws Exception;
 
     List<Package> findByStatus(int status);
-
+    Package setPackageBookTime( Package pkg) throws Exception;
 }

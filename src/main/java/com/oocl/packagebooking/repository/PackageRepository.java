@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface PackageRepository extends JpaRepository<Package,Integer> {
     List<Package> findByStatus(int status);
+
+    Package findByOrderId(String orderId);
+
 }

@@ -22,11 +22,15 @@ public class PackageController {
         return packageService.save(pkg);
     }
     @PutMapping("/packages/{id}")
-    public Package patchPackages(@PathVariable int id ,@RequestBody Package pkg){
+    public Package patchPackages(@PathVariable int id ,@RequestBody Package pkg) throws Exception{
         return packageService.setPackageStatus(id,pkg);
     }
     @GetMapping("/packages/{status}")
     public List<Package> getPackagesByMode(@PathVariable int status){
         return packageService.findByStatus(status);
+    }
+    @PutMapping("/packages/")
+    public Package patchPackages(@RequestBody Package pkg) throws Exception{
+        return packageService.setPackageBookTime(pkg);
     }
 }

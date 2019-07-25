@@ -1,5 +1,7 @@
 package com.oocl.packagebooking.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,7 +28,16 @@ public class Package {
     private String phone;
     @NotNull
     private int status;
-    private long bookTime;
+    private String bookTime;
+    private String weight;
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -60,11 +71,11 @@ public class Package {
         this.status = status;
     }
 
-    public long getBookTime() {
+    public String getBookTime() {
         return bookTime;
     }
 
-    public void setBookTime(long bookTime) {
+    public void setBookTime(String bookTime) {
         this.bookTime = bookTime;
     }
 }
