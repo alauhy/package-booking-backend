@@ -15,4 +15,9 @@ public class PackageService implements PackageImpl {
     public List<Package> getAll() {
         return packageRepository.findAll();
     }
+
+    @Override
+    public Package save(Package pkg) {
+        return packageRepository.save(pkg);
+    }
 }

@@ -8,4 +8,5 @@ public interface PackageImpl {
     List<Package> getAll();
 
 
+    Package save(Package pkg);
 }
