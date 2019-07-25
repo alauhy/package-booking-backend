@@ -22,6 +22,11 @@ public class PackageService implements PackageImpl {
     }
 
     @Override
+    public List<Package> findByStatus(int status) {
+        return packageRepository.findByStatus(status);
+    }
+
+    @Override
     public Package setPackageStatus(int id, Package pkg) {
         pkg.setId(id);
         return packageRepository.save(pkg);

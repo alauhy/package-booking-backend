@@ -12,4 +12,6 @@ public interface PackageImpl {
 
     Package setPackageStatus(int id,Package pkg);
 
+    List<Package> findByStatus(int status);
+
 }

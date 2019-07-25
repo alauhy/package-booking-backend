@@ -18,6 +18,7 @@ public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true,nullable = false)
     private String orderId;
     @NotNull
     private String customerName;

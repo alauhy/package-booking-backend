@@ -25,4 +25,8 @@ public class PackageController {
     public Package patchPackages(@PathVariable int id ,@RequestBody Package pkg){
         return packageService.setPackageStatus(id,pkg);
     }
+    @GetMapping("/packages/{status}")
+    public List<Package> getPackagesByMode(@PathVariable int status){
+        return packageService.findByStatus(status);
+    }
 }

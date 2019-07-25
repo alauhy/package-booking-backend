@@ -85,7 +85,8 @@ public class PackageAPITest {
 
 
 
-    }  @Test
+    }
+    @Test
     void should_update_package_status_and_return_package() throws Exception{
 
         Package package1 = new Package();
@@ -105,6 +106,45 @@ public class PackageAPITest {
                 .andExpect(jsonPath("$.phone",is("13509256210")))
                 .andExpect(jsonPath("$.bookTime",is(121313454)))
                 .andExpect(jsonPath("$.orderId",is("201907240001")));
+
+
+
+    }
+    @Test
+    void should_return_packages_when_given_status() throws Exception{
+
+        Package package1 = new Package();
+        package1.setOrderId("201907240001");
+        package1.setBookTime(121313454);
+        package1.setPhone("13509256210");
+        package1.setCustomerName("lxy");
+        package1.setStatus(NOT_GET);
+        Package package2 = new Package();
+        package2.setOrderId("201907240002");
+        package2.setBookTime(121313454);
+        package2.setPhone("13509256210");
+        package2.setCustomerName("ldd");
+        package2.setStatus(NOT_GET);
+        Package package3 = new Package();
+        package3.setOrderId("201907240001");
+        package3.setBookTime(121313454);
+        package3.setPhone("13509256210");
+        package3.setCustomerName("lxy");
+        package3.setStatus(GETED);
+        List<Package> packages = new ArrayList<>();
+        packages.add(package1);
+        packages.add(package2);
+        packages.add(package3);
+        when(packageService.findByStatus(anyInt())).thenReturn(packages);
+
+        ResultActions resultActions = mvc.perform(get("/packages/{mode}",NOT_GET)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(package1)))
+                .andExpect(jsonPath("$[1].status",is(NOT_GET)))
+                .andExpect(jsonPath("$[1].customerName",is("ldd")))
+                .andExpect(jsonPath("$[1].phone",is("13509256210")))
+                .andExpect(jsonPath("$[1].bookTime",is(121313454)))
+                .andExpect(jsonPath("$[1].orderId",is("201907240002")));
 
 
 
