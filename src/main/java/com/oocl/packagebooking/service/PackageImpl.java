@@ -9,4 +9,7 @@ public interface PackageImpl {
 
 
     Package save(Package pkg);
+
+    Package setPackageStatus(int id,Package pkg);
+
 }

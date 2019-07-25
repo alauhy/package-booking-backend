@@ -20,4 +20,10 @@ public class PackageService implements PackageImpl {
     public Package save(Package pkg) {
         return packageRepository.save(pkg);
     }
+
+    @Override
+    public Package setPackageStatus(int id, Package pkg) {
+        pkg.setId(id);
+        return packageRepository.save(pkg);
+    }
 }

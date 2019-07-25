@@ -3,10 +3,7 @@ package com.oocl.packagebooking.controller;
 import com.oocl.packagebooking.model.Package;
 import com.oocl.packagebooking.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,9 @@ public class PackageController {
     @PostMapping("/packages")
     public Package addPackages(@RequestBody Package pkg){
         return packageService.save(pkg);
+    }
+    @PutMapping("/packages/{id}")
+    public Package patchPackages(@PathVariable int id ,@RequestBody Package pkg){
+        return packageService.setPackageStatus(id,pkg);
     }
 }

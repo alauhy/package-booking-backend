@@ -17,9 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ExtendWith(SpringExtension.class)
@@ -76,6 +78,29 @@ public class PackageAPITest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(package1)))
                 .andExpect(jsonPath("$.status",is(NOT_GET)))
+                .andExpect(jsonPath("$.customerName",is("lxy")))
+                .andExpect(jsonPath("$.phone",is("13509256210")))
+                .andExpect(jsonPath("$.bookTime",is(121313454)))
+                .andExpect(jsonPath("$.orderId",is("201907240001")));
+
+
+
+    }  @Test
+    void should_update_package_status_and_return_package() throws Exception{
+
+        Package package1 = new Package();
+        package1.setOrderId("201907240001");
+        package1.setBookTime(121313454);
+        package1.setPhone("13509256210");
+        package1.setCustomerName("lxy");
+        package1.setStatus(GETED);
+
+        when(packageService.setPackageStatus(anyInt(),any())).thenReturn(package1);
+
+        ResultActions resultActions = mvc.perform(put("/packages/{id}",package1.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(package1)))
+                .andExpect(jsonPath("$.status",is(GETED)))
                 .andExpect(jsonPath("$.customerName",is("lxy")))
                 .andExpect(jsonPath("$.phone",is("13509256210")))
                 .andExpect(jsonPath("$.bookTime",is(121313454)))
